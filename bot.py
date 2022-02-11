@@ -19,6 +19,17 @@ async def on_ready():
     
 @bot.command()
 async def update_info(ctx):
-    print(ctx.author.name)
+    print(ud.initPlayerData({
+        str(ctx.author.id):{
+            "fullname":f"{ctx.author.name}#{ctx.author.discriminator}",
+            "name":ctx.author.name,
+            "discriminator":ctx.author.discriminator,
+            "id":ctx.author.id
+        }
+    }))
+    
+# @bot.command()
+# async def clear_data(ctx):
+#     ud.clearAllPlayerData()
 
-# bot.run(token)
+bot.run(token)
