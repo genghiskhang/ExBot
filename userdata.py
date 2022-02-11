@@ -5,6 +5,14 @@ from os.path import exists
 def getData():
     with open('assets\\data.json') as file:
         return json.load(file)
+    
+# Retrieves a player's data in the data.json
+def getPlayerData(id):
+    with open('assets\\data.json') as file:
+        try:
+            return json.load(file)['playerInfo'][id]
+        except:
+            return 'Player not found'
 
 # Creates a new data.json file
 def createDataJson():
@@ -36,8 +44,11 @@ def initPlayerData(id, playerInfo):
     return "Successfully initialized player information"
 
 # Updates a player's data
-def updatePlayerData(id):
-    pass
+def updatePlayerData(id, dataKey, newData):
+    data = getPlayerData(id)
+    data[dataKey] = newData
+    with open('assets\\data.json', 'w') as file:
+        file.write(json.dumps(data, indent=4))
 
 # Clears a single player's data from JSON
 def removePlayerData(id):
