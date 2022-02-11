@@ -45,8 +45,8 @@ def initPlayerData(id, playerInfo):
 
 # Updates a player's data
 def updatePlayerData(id, dataKey, newData):
-    data = getPlayerData(id)
-    data[dataKey] = newData
+    data = getData()
+    data['playerInfo'][id][dataKey] = newData
     with open('assets\\data.json', 'w') as file:
         file.write(json.dumps(data, indent=4))
 
