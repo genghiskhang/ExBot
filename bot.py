@@ -19,7 +19,7 @@ async def on_ready():
     
 @bot.command()
 async def update_info(ctx):
-    print(ud.initPlayerData({
+    print(ud.initPlayerData(ctx.author.id, {
         str(ctx.author.id):{
             "fullname":f"{ctx.author.name}#{ctx.author.discriminator}",
             "name":ctx.author.name,
