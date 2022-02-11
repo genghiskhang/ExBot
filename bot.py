@@ -19,6 +19,7 @@ async def on_ready():
     
 @bot.command()
 async def update_info(ctx):
+    ud.createDataJson()
     print(ud.initPlayerData(ctx.author.id, {
         str(ctx.author.id):{
             "fullname":f"{ctx.author.name}#{ctx.author.discriminator}",
@@ -27,6 +28,10 @@ async def update_info(ctx):
             "id":ctx.author.id
         }
     }))
+    
+@bot.command()
+async def getPoints(ctx):
+    pass
     
 # @bot.command()
 # async def clear_data(ctx):

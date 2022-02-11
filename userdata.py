@@ -1,18 +1,24 @@
 import json
 from os.path import exists
 
+# Returns data.json as a dictionary
+def getData():
+    with open('assets\\data.json') as file:
+        return json.load(file)
+
 # Creates a new data.json file
 def createDataJson():
-    dict = {
+    base = {
         'playerInfo':{
         }
     }
     if not exists('assets\\data.json'):
+        open('assets\\data.json', 'x')
         with open('assets\\data.json', 'w') as file:
-            file.write(json.dumps(dict, indent=4))
-        return 'A data.json file was created'
+            file.write(json.dumps(base, indent=4))
+        return 'data.json created'
     else:
-        return 'A data.json file already exists'
+        return 'data.json already exists'
     
 # Creates and appends a data entry of user into data.json if one does not exist already
 def initPlayerData(id, playerInfo):
