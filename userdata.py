@@ -38,24 +38,6 @@ def clearAllPlayerData():
         oldData['playerInfo'].clear()
     with open('assets\\data.json', 'w') as file:
         file.write(json.dumps(oldData, indent=4))
-
-dict = {
-    "Red":{
-        "name":"Exo",
-        "id":9511
-    }
-}
-
-# createDataJson()
-# print(initPlayerData('Red', dict))
-# clearAllPlayerData()
-
-# Checks if the discord user already has registered info inside the JSON
-def checkExisting(userKey):
-    with open('assets\\data.json', 'r') as file:
-        if userKey in json.load(file):
-            return True
-    return False
             
 # Initializes user data into the JSON
 def initUser(ctx):
