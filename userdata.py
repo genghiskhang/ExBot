@@ -23,13 +23,13 @@ def createDataJson():
 # Creates and appends a data entry of user into data.json if one does not exist already
 def initPlayerData(id, playerInfo):
     with open('assets\\data.json') as file:
-        oldData = json.load(file)
-        if id in oldData['playerInfo']:
-            return "Player already exists"
-        oldData['playerInfo'].update(playerInfo)
+        data = json.load(file)
+        if id in data['playerInfo']:
+            return "Your player information has already been registered"
+        data['playerInfo'].update(playerInfo)
     with open('assets\\data.json', 'w') as file:
-        file.write(json.dumps(oldData, indent=4))
-    return "Successfully appended player info"
+        file.write(json.dumps(data, indent=4))
+    return "Successfully registered player information"
 
 # Clears a single player's data from JSON
 # def clearPlayerData(id):
@@ -40,10 +40,10 @@ def initPlayerData(id, playerInfo):
 # Clears all player data from JSON
 def clearAllPlayerData():
     with open('assets\\data.json') as file:
-        oldData = json.load(file)
-        oldData['playerInfo'].clear()
+        data = json.load(file)
+        data['playerInfo'].clear()
     with open('assets\\data.json', 'w') as file:
-        file.write(json.dumps(oldData, indent=4))
+        file.write(json.dumps(data, indent=4))
             
 # Initializes user data into the JSON
 def initUser(ctx):

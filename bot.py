@@ -17,21 +17,25 @@ async def on_ready():
           '                                       /\___/\n'+
           '                                       \/__/ \n')
     
+# Registers a new user's information
 @bot.command()
-async def update_info(ctx):
+async def register_info(ctx):
     ud.createDataJson()
-    print(ud.initPlayerData(ctx.author.id, {
+    await ctx.channel.send(ud.initPlayerData(str(ctx.author.id), {
         str(ctx.author.id):{
-            "fullname":f"{ctx.author.name}#{ctx.author.discriminator}",
-            "name":ctx.author.name,
-            "discriminator":ctx.author.discriminator,
-            "id":ctx.author.id
+            'fullname':f'{ctx.author.name}#{ctx.author.discriminator}',
+            'name':ctx.author.name,
+            'discriminator':ctx.author.discriminator,
+            'id':ctx.author.id,
+            'points':0
         }
     }))
     
+# Retrieves the amount of points a player has
 @bot.command()
-async def getPoints(ctx):
-    pass
+async def get_points(ctx):
+    points = ud.getData()['playerInfo'][str(ctx.author.id)]['points']
+    await ctx.channel.send(f'{ctx.author.name} currently has {points} points')
     
 # @bot.command()
 # async def clear_data(ctx):
