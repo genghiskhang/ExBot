@@ -18,6 +18,16 @@ def createDataJson():
             file.write(json.dumps(base, indent=4))
         return 'data.json created'
     else:
+        with open('assets\\data.json') as file:
+            data = json.load(file)
+            if 'playerInfo' not in data:
+                data.update({
+                    'playerInfo':{
+                    }
+                })
+                with open('assets\\data.json', 'w') as file:
+                    file.write(json.dumps(data, indent=4))
+                return 'playerInfo added to data.json'
         return 'data.json already exists'
     
 # Creates and appends a data entry of user into data.json if one does not exist already
@@ -25,11 +35,11 @@ def initPlayerData(id, playerInfo):
     with open('assets\\data.json') as file:
         data = json.load(file)
         if id in data['playerInfo']:
-            return "Your player information has already been registered"
+            return "Player information already exists"
         data['playerInfo'].update(playerInfo)
     with open('assets\\data.json', 'w') as file:
         file.write(json.dumps(data, indent=4))
-    return "Successfully registered player information"
+    return "Successfully initialized player information"
 
 # Updates a player's data
 def updatePlayerData(id):
