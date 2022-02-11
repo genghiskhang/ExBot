@@ -44,7 +44,3 @@ def clearAllPlayerData():
         data['playerInfo'].clear()
     with open('assets\\data.json', 'w') as file:
         file.write(json.dumps(data, indent=4))
-            
-# Initializes user data into the JSON
-def initUser(ctx):
-    pass
