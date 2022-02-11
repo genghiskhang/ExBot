@@ -31,11 +31,17 @@ def initPlayerData(id, playerInfo):
         file.write(json.dumps(data, indent=4))
     return "Successfully registered player information"
 
+# Updates a player's data
+def updatePlayerData(id):
+    pass
+
 # Clears a single player's data from JSON
-# def clearPlayerData(id):
-#     with open('assets\\data.json') as file:
-#         oldData = json.load(file)
-#         oldData['playerInfo'].remove(id)
+def removePlayerData(id):
+    with open('assets\\data.json') as file:
+        data = json.load(file)
+        data['playerInfo'].pop(str(id))
+    with open('assets\\data.json', 'w') as file:
+        file.write(json.dumps(data, indent=4))
 
 # Clears all player data from JSON
 def clearAllPlayerData():

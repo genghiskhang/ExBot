@@ -1,9 +1,11 @@
+import discord
 from discord.ext import commands
 import userdata as ud
 
 prefix = '--'
 token = open('assets\\token.txt', 'r').readline().strip() # Create a token.txt file in assets folder and paste your token in there
-bot = commands.Bot(command_prefix = prefix)
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix=prefix, intents=intents)
 
 @bot.event
 async def on_ready():
@@ -16,20 +18,36 @@ async def on_ready():
           '    \/_/\/ /\/____/\/__/\/_/\/__,_ /`/___/> \\\n'+
           '                                       /\___/\n'+
           '                                       \/__/ \n')
+
+# Registers a new user's information
+@bot.event
+async def on_member_join(member):
+    ud.initPlayerData(str(member.id), {
+        str(member.id):{
+            'fullname':f'{member.name}#{member.discriminator}',
+            'name':member.name,
+            'discriminator':member.discriminator,
+            'id':member.id,
+            'points':0
+        }
+    })
+    print(f"{member.name} has joined")
+    
+# Updates a player's information when they update their personal information
+@bot.event
+async def on_member_update(member):
+    pass
+
+# Removes a player's information when they leave
+@bot.event
+async def on_member_remove(member):
+    ud.removePlayerData(member.id)
+    print(f"{member.name} has left")
     
 # Registers a new user's information
 @bot.command()
 async def register_info(ctx):
     ud.createDataJson()
-    await ctx.channel.send(ud.initPlayerData(str(ctx.author.id), {
-        str(ctx.author.id):{
-            'fullname':f'{ctx.author.name}#{ctx.author.discriminator}',
-            'name':ctx.author.name,
-            'discriminator':ctx.author.discriminator,
-            'id':ctx.author.id,
-            'points':0
-        }
-    }))
     
 # Retrieves the amount of points a player has
 @bot.command()
