@@ -27,7 +27,7 @@ async def on_member_join(member):
             'fullname':f'{member.name}#{member.discriminator}',
             'name':member.name,
             'discriminator':member.discriminator,
-            'id':member.id,
+            'id':str(member.id),
             'points':0
         }
     })

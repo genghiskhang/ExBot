@@ -36,9 +36,10 @@ def createDataJson():
 def initPlayerData(id, playerInfo):
     with open('assets\\data.json') as file:
         data = json.load(file)
-        if id in data['playerInfo']:
+        if str(id) in data['playerInfo']:
             return "Player information already exists"
         data['playerInfo'].update(playerInfo)
+        print(playerInfo)
     with open('assets\\data.json', 'w') as file:
         file.write(json.dumps(data, indent=4))
     return "Successfully initialized player information"
@@ -46,7 +47,7 @@ def initPlayerData(id, playerInfo):
 # Updates a player's data
 def updatePlayerData(id, dataKey, newData):
     data = getData()
-    data['playerInfo'][id][dataKey] = newData
+    data['playerInfo'][str(id)][dataKey] = newData
     with open('assets\\data.json', 'w') as file:
         file.write(json.dumps(data, indent=4))
 
